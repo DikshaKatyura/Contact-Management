@@ -1,10 +1,9 @@
-import {useRef} from 'react';
+import {useRef ,FC} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
+import {useParams,useNavigate} from 'react-router-dom'
 import { uiActions } from '../store/uiSlice';
 import { contactActions } from '../store/contactSlice';
 import { contactType } from '../data/model';
-import {FC} from 'react';
-import {useParams} from 'react-router-dom'
 import { AppDispatch, RootState } from '../store/store';
 
 
@@ -13,11 +12,12 @@ const style = {
     width : '100%'
 }
 const ContactForm:FC<{contactList ?: contactType[]}> = (props) => {
-    const isActive = useSelector<RootState>((state) => state.ui.isActive);
+    const isActive = useSelector<RootState,string>((state) => state.ui.isActive);
     const dispatch = useDispatch<AppDispatch>();
     const firstNameRef = useRef<HTMLInputElement>(null);
     const lastNameRef = useRef<HTMLInputElement>(null);
     const params = useParams();
+    const navigate = useNavigate();
 
     const contacts = props.contactList?.filter(item => item.id === params.contactId);
     console.log(contacts);
@@ -38,9 +38,10 @@ const ContactForm:FC<{contactList ?: contactType[]}> = (props) => {
             id : Math.random().toString(),
             firstname : firstNameRef.current!.value,
             lastname : lastNameRef.current!.value,
-            isActive : isActive === 'active' ? true : false
+            isActive : isActive
         }        
-        dispatch(contactActions.addContacts(formData))
+        dispatch(contactActions.addContacts(formData));
+        navigate('/contacts');
         
     }
     return(
@@ -54,15 +55,15 @@ const ContactForm:FC<{contactList ?: contactType[]}> = (props) => {
              <div className="pt-5">
                 <div className="flex">
                 <label style={style} className="m-2 flex" htmlFor="active">Active</label>
-                <input style={style} className="m-2" type="radio" id="active" name='isactive'  onChange={isActiveChangeHandler} checked = {contacts?.[0].isActive ? contacts?.[0].isActive : isActive === 'active'} />
+                <input style={style} className="m-2" type="radio" id="active" name='isactive'  onChange={isActiveChangeHandler} checked = {contacts?.[0].isActive === 'active' || undefined} />
                 </div>
                 <div className="flex">
                 <label style={style} className="m-2 flex" htmlFor="inactive">In-Active</label>
-                <input style={style} className="m-2" type="radio" id="inactive" name='isactive' onChange={isInactiveChangeHandler} checked = {contacts?.[0].isActive ? isActive === 'inactive' : contacts?.[0].isActive}/>
+                <input style={style} className="m-2" type="radio" id="inactive" name='isactive' onChange={isInactiveChangeHandler}  checked = {contacts?.[0].isActive === 'inactive' || undefined }/>
                 </div>
              </div>
         </div>
-        <button type='submit' className='py-3 p-3 bg-[#65a30d] w-20 my-20 mx-auto rounded hover:bg-[#4d7c0f]'>ADD</button>
+        <button type='submit' className='py-3 p-3 bg-[#f59e0b] w-20 my-20 mx-auto rounded hover:bg-[#d97706]'>ADD</button>
     </form>
     )
 }

@@ -1,7 +1,7 @@
 const Header = () => {
 return (
     <div className="">
-        <h1>Contacts Management App</h1>
+        <p className="text-xl font-bold text-[#c084fc]">Contacts Management App</p>
     </div>
 );
 }

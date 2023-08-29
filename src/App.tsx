@@ -9,15 +9,16 @@ import ContactDetails from './pages/ContactDetails';
 import EditContact from './pages/EditContact';
 
 const routes = createBrowserRouter([
-  {path : '/', element: <Root/>},
-  {path : 'contacts', element :<ContactsRoot />, children :[
-    {index : true, element : <ContactsPage />},
-    {path : ':contactId',children:[
-      {index : true, element : <ContactDetails />},
-      {path : 'edit',element : <EditContact/>},
-    ]},
-    {path :'new',element:<NewContact />},
-  ]}
+  {path : '/', element: <Root/>,children:[
+    {path : 'contacts', element :<ContactsRoot />, children :[
+      {index : true, element : <ContactsPage />},
+      {path : ':contactId',children:[
+        {index : true, element : <ContactDetails />},
+        {path : 'edit',element : <EditContact/>},
+      ]},
+      {path :'new',element:<NewContact />},
+    ]}
+  ]},
 ])
 
 function App() {

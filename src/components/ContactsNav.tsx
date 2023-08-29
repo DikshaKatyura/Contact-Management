@@ -14,7 +14,7 @@ const ContactsNav = () =>{
             <NavLink to="/contacts" end className={activeClassHandler}>All Contacts</NavLink>
           </li>
           <li>
-            <NavLink to={'new'} className={activeClassHandler}>New Contact</NavLink>
+            <NavLink to={'new'} className={activeClassHandler}>Create Contact</NavLink>
           </li>
         </ul>
       </nav>

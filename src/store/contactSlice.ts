@@ -4,7 +4,7 @@ type listType = {
     id : string,
     firstname : string,
     lastname : string,
-    isActive : boolean
+    isActive : string
 }
 
 type stateType = {
