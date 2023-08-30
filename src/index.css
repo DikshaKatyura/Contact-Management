@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 * {
   box-sizing: border-box;
 }
@@ -60,3 +61,6 @@ ul {
   padding: 0;
 }
 
+.leaflet-container{
+  height: 500px;
+}

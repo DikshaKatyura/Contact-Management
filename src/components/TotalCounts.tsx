@@ -1,30 +1,43 @@
-import { useQuery} from 'react-query';
+import { useQuery } from "react-query";
 
 const TotalCounts = () => {
-    
-    const {isLoading, error, data} = useQuery('total-counts', async() =>
-    await fetch('https://disease.sh/v3/covid-19/all').then(res => 
-    res.json()
-    ),
+  const { isLoading, data } = useQuery(
+    "total-counts", //unique query-key
+    async () =>
+      await fetch("https://disease.sh/v3/covid-19/all").then((res) =>
+        res.json()
+      ),
     {
-        refetchOnWindowFocus : false
+      refetchOnWindowFocus: false, //won't refetch after tab change
+      cacheTime: 3000, // if inactive,it'll remove from cache
     }
-    )
+  );
 
-    if(!isLoading){
-        console.log(data);
-        console.log(Object.entries(data));
-    }
-    
-    
-    
+  let cases;
+  let deaths;
+  let recovered;
+  if (!isLoading) {
+    cases = data.cases;
+    deaths = data.deaths;
+    recovered = data.recovered;
+  }
 
-    return (
-        <>
-            <h1>tota; co</h1>
-        </>
-    )
-}
-
+  return (
+    <div className="flex justify-between mt-10 mx-auto px-5">
+      <div className="rounded border border-[#f59e0b] text-center py-8 px-10 my-4 mx-auto">
+        <p>Total Cases</p>
+        <p>{cases}</p>
+      </div>
+      <div className="rounded border border-[#dc2626] text-center py-8 px-10 my-4 mx-auto">
+        <p>Total Deaths</p>
+        <p>{deaths}</p>
+      </div>
+      <div className="rounded border border-[#65a30d] text-center py-8 px-10 my-4 mx-auto">
+        <p>Total Recovered</p>
+        <p>{recovered}</p>
+      </div>
+    </div>
+  );
+};
 
 export default TotalCounts;

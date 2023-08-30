@@ -1,13 +1,13 @@
-import {Outlet} from 'react-router-dom';
-import ContactsNav from '../components/ContactsNav';
+import { Outlet } from "react-router-dom";
+import ContactsNav from "../components/ContactsNav";
 
-const ContactsRoot =() =>{
-    return (
-        <>
-        <ContactsNav/>
-        <Outlet />
-        </>
-    );
-}
+const ContactsRoot = () => {
+  return (
+    <>
+      <ContactsNav />
+      <Outlet />
+    </>
+  );
+};
 
 export default ContactsRoot;

@@ -1,4 +1,4 @@
-import { useRef, FC, useState } from "react";
+import { useRef, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { uiActions } from "../store/uiSlice";
@@ -12,12 +12,13 @@ const style = {
 };
 const ContactForm: FC<{ contactList?: contactType[] }> = (props) => {
   const isActive = useSelector<RootState, string>((state) => state.ui.isActive);
-  const isFormError = useSelector<RootState, boolean>(state => state.ui.formError);
+  const isFormError = useSelector<RootState, boolean>(
+    (state) => state.ui.formError
+  );
   const dispatch = useDispatch<AppDispatch>();
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
-  const [firstName,setFirstName] = useState();
-  
+
   const params = useParams();
   const navigate = useNavigate();
 
@@ -33,6 +34,7 @@ const ContactForm: FC<{ contactList?: contactType[] }> = (props) => {
       lastname: lastNameRef.current!.value,
       isActive: isActive,
     };
+    //no Authentication added for now due to lack of time (as a festival is just in between)
     dispatch(contactActions.addContacts(formData));
     navigate("/contacts");
   };
@@ -97,26 +99,29 @@ const ContactForm: FC<{ contactList?: contactType[] }> = (props) => {
         </div>
       </div>
 
-       {isFormError && <div>
-            <p className="text-lg font-semibold text-red">Form cannot be empty!</p>
-        </div>}
+      {isFormError && (
+        <div>
+          <p className="text-lg font-semibold text-red">
+            Form cannot be empty!
+          </p>
+        </div>
+      )}
 
-        <div className="flex justify-evenly">
-      <button
-            
-            type="submit"
-            className="py-3 px-3 bg-[#d97706] w-24 my-20 rounded hover:bg-[#f59e0b]"
-            >
-        ADD
-      </button>
-      <button
-        type="submit"
-        className="py-3 px-3 bg-[#dc2626] w-24 my-20 rounded hover:bg-[#ef4444]"
-        onClick={() => navigate('..')}
+      <div className="flex justify-evenly">
+        <button
+          type="submit"
+          className="py-3 px-3 bg-[#d97706] w-24 my-20 rounded hover:bg-[#f59e0b]"
         >
-        CANCEL
-      </button>
-          </div>
+          ADD
+        </button>
+        <button
+          type="submit"
+          className="py-3 px-3 bg-[#dc2626] w-24 my-20 rounded hover:bg-[#ef4444]"
+          onClick={() => navigate("..")}
+        >
+          CANCEL
+        </button>
+      </div>
     </form>
   );
 };

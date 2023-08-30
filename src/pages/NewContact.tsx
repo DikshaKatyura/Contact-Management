@@ -1,11 +1,11 @@
 import ContactForm from "../components/ContactForm";
 
 const NewContact = () => {
-return(
+  return (
     <>
-    <ContactForm />
+      <ContactForm />
     </>
-);
-}
+  );
+};
 
 export default NewContact;

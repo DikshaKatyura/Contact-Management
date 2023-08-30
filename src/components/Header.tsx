@@ -1,9 +1,11 @@
 const Header = () => {
-return (
+  return (
     <div className="">
-        <p className="text-xl font-bold text-[#c084fc]">Contacts Management App</p>
+      <p className="text-xl font-bold text-[#c084fc]">
+        Contacts Management App
+      </p>
     </div>
-);
-}
+  );
+};
 
 export default Header;
