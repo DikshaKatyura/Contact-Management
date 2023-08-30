@@ -12,7 +12,7 @@ type sidemenuType = {
 const sidemenu :sidemenuType[] = [
     {
         name : 'dashboard',
-        path : ''
+        path : '/'
     },
     {
         name : 'contacts',
@@ -45,7 +45,7 @@ const Sidemenu = () => {
       <Header />
             <ul className='mt-5 gap-y-2'>
                 {sidemenu.map(menu => <li className='p-4 text-sm font-semibold text-[#f59e0b]' key={menu.path}>
-                    <Link to={menu.path} relative='path'>{menu.name}</Link>
+                    <Link to={menu.path} relative='route'>{menu.name}</Link>
                 </li>)}
             </ul>
         </div>

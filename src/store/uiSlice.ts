@@ -2,8 +2,9 @@ import {createSlice,PayloadAction} from '@reduxjs/toolkit';
 
 
 const initialState:stateType = {
-    isActive : 'inactive',
-    showSidemenu : false
+    isActive : 'active',
+    showSidemenu : false,
+    formError : false
 }
 
 
@@ -16,6 +17,9 @@ const uiSlice = createSlice({
         },
         setShowSidemenu(state){
             state.showSidemenu = !state.showSidemenu;
+        },
+        setFormError(state){
+            state.formError = !state.formError;
         }
     }
     
@@ -24,7 +28,8 @@ const uiSlice = createSlice({
 
 export type stateType = {
     isActive : string,
-    showSidemenu : boolean
+    showSidemenu : boolean,
+    formError : boolean
 }
 export const uiActions = uiSlice.actions;
 export default uiSlice.reducer;

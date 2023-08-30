@@ -28,6 +28,11 @@ const contactSlice = createSlice({
                 lastname : action.payload.lastname,
                 isActive : action.payload.isActive
             })
+        },
+        deleteContact(state,action:PayloadAction<string>){
+            state.list = state.list.filter(contact => contact.id !== action.payload);
+            console.log(state.list);
+            
         }
     }
 })
